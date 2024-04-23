@@ -8,13 +8,12 @@ class WeatherApi {
 
   WeatherApi({required this.apiKey});
 
-  Future<Map<String, dynamic>> fetchWeatherData(
+  Future<Map<String, dynamic>> fetchWeatherDataByCityName(String cityName,
       double latitude, double longitude) async {
-    // String fetchWeatherURl = 
-    // TODO #1: add a ternary operator here to check whether the querying data is for Lat & Long or text search query. Based on the URL will change in the following manner
-    // case 1: (lat & long) => "apiUrl?lat=<latitude value will come here>&long=<longitude value will come here>&appid=<your API key>
-    // case 2: (query) => "apiUrl?q=<enter your city name>&appid=<your api key>.
-    final response = await http.get(Uri.parse(
+    String fetchWeatherUrl;
+    fetchWeatherUrl= 'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={0818b875d3e21bd91f44fb28ef1f7554}';
+    fetchWeatherUrl= 'https://api.openweathermap.org/data/2.5/weather?q=<enter your current city name>&appid={0818b875d3e21bd91f44fb28ef1f7554}';
+    final http.Response response = await http.get(Uri.parse(
         "$apiUrl?q=hyderabad&appid=0818b875d3e21bd91f44fb28ef1f7554&lang=en"));
     if (response.statusCode == 200) {
       if (kDebugMode) {

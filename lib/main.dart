@@ -17,11 +17,19 @@ class MyApp extends StatelessWidget {
       create: (context) => WeatherProvider(),
       child: MaterialApp(
         title: 'Windicia',
-        theme: ThemeData(primarySwatch: Colors.indigo),
         initialRoute: '/',
         routes:routes,
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            scaffoldBackgroundColor: const Color(0xFF303030),
+          brightness: Brightness.light,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+        ),
+        themeMode: ThemeMode.dark,
+        ),
+      );
   }
 }
 

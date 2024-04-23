@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import'package:provider/provider.dart';
 import 'package:windicia/weather_provider.dart';
 
 class LocationPickerScreen extends StatefulWidget{
-  const LocationPickerScreen({super.key});
+   LocationPickerScreen({super.key});
   @override
   _LocationPickerScreenState createState() => _LocationPickerScreenState();
+  TextEditingController searchController= TextEditingController();
   }
 
 class _LocationPickerScreenState extends State<LocationPickerScreen>{
@@ -32,9 +33,22 @@ class _LocationPickerScreenState extends State<LocationPickerScreen>{
                 },
               child: const Text('Set the location'),
             ),
+            TextField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the City',
+                labelText: 'City',
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: (){
+                    var fetchWeatherDataByText = provider.fetchWeatherDataByText(searchController.text);
+                  },
+                ),
+              ),
+            )
           ],
         ),
       ),
     );
   }
-}
+  }

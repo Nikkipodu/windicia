@@ -8,20 +8,39 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final weatherData = Provider.of<WeatherProvider>(context).weatherData;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: const Text('Weather')),
       body: weatherData != null
           ? Center(
               child: Column(
-              children: [
-                // TODO #3: Add a text field to do text search. Use the enterred text and pass it to the API call.
+              children: <Widget>[
                 WeatherInfoWidget(weatherData: weatherData),
-              ],
+                Container(
+                  height: size.height * 0.99,
+                  width: size.width,
+                  margin: const EdgeInsets.only(right: 12 , left: 12),
+                  padding: const EdgeInsets.all(70.0),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: const LinearGradient(
+                        colors: [
+                          Color(0xFF90CAF9),
+                          Color(0xFFBBDEFB),
+                        ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    )
+                  ),
+                )
+                //
+
+
+      ],
             ))
           : const CircularProgressIndicator(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO #4: I think you made this floating action button to add the weather update based on the location. Implement the get location functionality and then pass the lat & long to the API.  
         },
         child: const Icon(Icons.location_on),
       ),
@@ -50,11 +69,11 @@ class WeatherInfoWidget extends StatelessWidget {
         const SizedBox(height: 10),
         Text(weatherData.city,
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         Text(weatherData.description, style: const TextStyle(fontSize: 23)),
         const SizedBox(height: 10),
         Text('''
-                ${weatherData.temperature.toStringAsFixed(0)}''',
+                ${weatherData.temperature.toStringAsFixed(0)}`C''',
             style: const TextStyle(fontSize: 21)),
         Text("Humidity:${weatherData.humidity}",
             style: const TextStyle(fontSize: 19)),
