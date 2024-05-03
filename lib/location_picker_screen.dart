@@ -6,13 +6,12 @@ class LocationPickerScreen extends StatefulWidget{
    LocationPickerScreen({super.key});
   @override
   _LocationPickerScreenState createState() => _LocationPickerScreenState();
-  TextEditingController searchController= TextEditingController();
   }
 
 class _LocationPickerScreenState extends State<LocationPickerScreen>{
-  var double_latitude= 0.0;
-  var double_longitude=0.0;
-
+  var doublelatitude= 0.0;
+  var doublelongitude=0.0;
+  TextEditingController searchController= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,32 +22,29 @@ class _LocationPickerScreenState extends State<LocationPickerScreen>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Latitude:$double_latitude'),
-            Text('Longitude:$double_longitude'),
+            Text('Latitude:$doublelatitude'),
+            Text('Longitude:$doublelongitude'),
             ElevatedButton(
                 onPressed:(){
                   final weatherProvider= Provider.of<WeatherProvider>(context, listen: false);
-                  weatherProvider.setLocation(double_latitude, double_longitude);
+                  weatherProvider.setLocation(doublelatitude, doublelongitude);
                   Navigator.pop(context);
                 },
               child: const Text('Set the location'),
             ),
             TextField(
               controller: searchController,
+          void Function(String)? onSubmitted:(),
               decoration: const InputDecoration(
                 hintText: 'Enter the City',
                 labelText: 'City',
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: (){
-                    var fetchWeatherDataByText = provider.fetchWeatherDataByText(searchController.text);
-                  },
+                suffixIcon: Icon(
+                   Icons.search,
                 ),
               ),
-            )
-          ],
         ),
-      ),
+  ]),
+    ),
     );
   }
   }

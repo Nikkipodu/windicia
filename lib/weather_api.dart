@@ -10,9 +10,7 @@ class WeatherApi {
 
   Future<Map<String, dynamic>> fetchWeatherDataByCityName(String cityName,
       double latitude, double longitude) async {
-    String fetchWeatherUrl;
-    fetchWeatherUrl= 'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={0818b875d3e21bd91f44fb28ef1f7554}';
-    fetchWeatherUrl= 'https://api.openweathermap.org/data/2.5/weather?q=<enter your current city name>&appid={0818b875d3e21bd91f44fb28ef1f7554}';
+    String apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=<enter your current city name>&appid={0818b875d3e21bd91f44fb28ef1f7554}';
     final http.Response response = await http.get(Uri.parse(
         "$apiUrl?q=hyderabad&appid=0818b875d3e21bd91f44fb28ef1f7554&lang=en"));
     if (response.statusCode == 200) {
